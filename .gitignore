@@ -3,6 +3,10 @@ node_modules/
 *.log
 .env
 .vscode/
+*.bak
+*.bak2
+*.bak3
+*_副本.html
 .idea/
 *.swp
 *.swo
