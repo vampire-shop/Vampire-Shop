@@ -142,6 +142,96 @@
             box-sizing: border-box;
             height: 80px;
         }
+
+        /* 移动端导航菜单按钮 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+
+        /* 移动端响应式设计 */
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-link {
+                margin: 15px 0;
+                font-size: 1.2rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+                position: static;
+                transform: none;
+            }
+
+            .header {
+                padding: 15px 20px;
+                height: auto;
+                justify-content: space-between;
+            }
+
+            .model-container {
+                height: calc(100vh - 60px);
+                margin-top: 60px;
+            }
+        }
+
+        /* 适配小屏幕手机 */
+        @media screen and (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .nav-link {
+                font-size: 1rem;
+            }
+
+            .header {
+                padding: 10px 15px;
+            }
+        }
+
         .logo {
             font-family: 'Cinzel', serif;
             font-size: 3.2rem;
@@ -150,9 +240,6 @@
             text-shadow: 
                 0 0 20px rgba(255, 0, 0, 0.3),
                 0 0 40px rgba(255, 0, 0, 0.2);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
             letter-spacing: 4px;
             z-index: 1;
         }
@@ -2059,6 +2146,243 @@
                 font-size: 12px;
             }
         }
+
+        /* 优化移动端样式 */
+        @media screen and (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+                height: 60px;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                transition: transform 0.3s ease-in-out;
+                transform: translateX(-100%);
+            }
+
+            .nav-links.active {
+                display: flex;
+                transform: translateX(0);
+            }
+
+            .nav-link {
+                margin: 15px 0;
+                font-size: 1.2rem;
+                opacity: 0;
+                transform: translateY(20px);
+                animation: fadeInUp 0.5s forwards;
+            }
+
+            @keyframes fadeInUp {
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* 防止菜单打开时页面滚动 */
+            body.menu-open {
+                overflow: hidden;
+            }
+
+            /* 优化按钮和输入框在移动端的大小 */
+            button, input, select {
+                min-height: 44px;
+                font-size: 16px;
+            }
+
+            /* 优化触摸目标大小 */
+            .nav-link, .product-card, .add-to-cart {
+                padding: 12px;
+                margin: 8px;
+            }
+        }
+
+        /* 添加暗色模式支持 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #000;
+                color: #fff;
+            }
+        }
+
+        /* 浮屏广告样式 */
+        .discount-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .discount-content {
+            background: rgba(20, 20, 20, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            max-width: 90%;
+            width: 500px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .discount-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .discount-image {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .discount-title {
+            font-family: 'Cinzel', serif;
+            color: #ff0000;
+            font-size: 24px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+
+        .discount-text {
+            color: #fff;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .discount-code {
+            background: rgba(255, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .copy-code-btn {
+            background: #ff0000;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+        }
+
+        .copy-code-btn:hover {
+            background: #cc0000;
+        }
+
+        /* 移动端优化 */
+        @media screen and (max-width: 768px) {
+            .discount-content {
+                width: 90%;
+                padding: 20px;
+                margin: 20px;
+            }
+
+            .discount-title {
+                font-size: 20px;
+            }
+
+            .discount-text {
+                font-size: 14px;
+            }
+
+            .discount-image {
+                max-height: 150px;
+            }
+
+            .close-modal {
+                font-size: 20px;
+                right: 10px;
+                top: 5px;
+            }
+
+            .discount-code {
+                padding: 10px;
+            }
+
+            .copy-code-btn {
+                width: 100%;
+                margin-top: 8px;
+                padding: 8px 15px;
+            }
+        }
+
+        /* 超小屏幕优化 */
+        @media screen and (max-width: 480px) {
+            .discount-content {
+                padding: 15px;
+                margin: 15px;
+            }
+
+            .discount-title {
+                font-size: 18px;
+            }
+
+            .discount-text {
+                font-size: 13px;
+                margin-bottom: 15px;
+            }
+
+            .discount-image {
+                max-height: 120px;
+            }
+
+            .discount-code {
+                font-size: 13px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -2095,16 +2419,21 @@
     <!-- 3D模型容器 -->
     <div class="model-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 1;"></div>
 
-    <div class="header">
-        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-        <a href="index.html" class="logo">Vampire Mystery Shop</a>
-        <div class="nav-links">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="products.html" class="nav-link">Products</a>
-            <a href="information.html" class="nav-link">About</a>
-            <a href="user.html" class="nav-link">Contact</a>
-        </div>
-    </div>
+    <header class="header">
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="/" class="logo">Vampire Shop</a>
+        <nav class="nav-links" id="navLinks">
+            <a href="/" class="nav-link">首页</a>
+            <a href="/products.html" class="nav-link">商品</a>
+            <a href="/information.html" class="nav-link">关于</a>
+            <a href="/account.html" class="nav-link">账户</a>
+            <a href="/orders.html" class="nav-link">订单</a>
+        </nav>
+    </header>
 
     <div class="hero">
         <div class="hero-content">
@@ -3049,6 +3378,31 @@
             startAutoplay();
         });
     });
+    </script>
+
+    <script>
+        // 添加移动端导航菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                document.body.classList.toggle('menu-open');
+                
+                // 切换汉堡菜单动画
+                this.classList.toggle('active');
+            });
+
+            // 点击导航链接时关闭菜单
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.classList.remove('active');
+                    document.body.classList.remove('menu-open');
+                });
+            });
+        });
     </script>
 </body>
 </html> 

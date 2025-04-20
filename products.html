@@ -77,6 +77,34 @@
             z-index: 1000;
         }
 
+        /* 移动端导航菜单按钮 */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 10;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: #fff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
         .logo {
             font-family: 'Cinzel', serif;
             font-size: 2rem;
@@ -84,11 +112,6 @@
             text-decoration: none;
             text-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
             letter-spacing: 4px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
         }
 
         .nav-link {
@@ -599,74 +622,90 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-        @media (max-width: 768px) {
-            .header {
-                padding: 0.8rem 1rem;
-            }
-
-            .logo {
-                font-size: 1.5rem;
+        /* 移动端响应式设计 */
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
             }
 
             .nav-links {
+                display: none;
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-link {
+                margin: 15px 0;
+                font-size: 1.2rem;
+            }
+
+            .logo {
+                font-size: 2rem;
+            }
+
+            .header {
+                padding: 15px 20px;
+            }
+
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 gap: 1rem;
+                padding: 1rem;
+            }
+
+            .product-card {
+                margin: 0;
+            }
+
+            .category-nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .category-nav a {
+                font-size: 0.9rem;
+                padding: 0.3rem 0.8rem;
+            }
+        }
+
+        /* 适配小屏幕手机 */
+        @media screen and (max-width: 480px) {
+            .logo {
+                font-size: 1.5rem;
             }
 
             .nav-link {
                 font-size: 1rem;
             }
 
-            .products-container {
-                padding: 6rem 1rem 1rem;
+            .header {
+                padding: 10px 15px;
             }
 
             .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                gap: 1.5rem;
-            }
-
-            .product-details {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .cart-modal {
-                width: 100%;
             }
 
-            .gallery-image {
-                height: 350px;
+            .category-nav {
+                padding: 0.5rem;
             }
 
-            .thumbnail {
-                height: 200px;
-            }
-
-            .modal-content {
-                margin: 2rem auto;
-                padding: 1.5rem;
-            }
-
-            .checkout-content {
-                width: 95%;
-                padding: 2rem;
-                margin: 1rem;
-            }
-
-            .product-description {
-                padding: 1rem;
-            }
-
-            .product-description h2 {
-                font-size: 1.5rem;
-            }
-
-            .product-description .product-price {
-                font-size: 1.3rem;
-            }
-
-            .product-details-text {
-                font-size: 1rem;
+            .category-nav a {
+                font-size: 0.8rem;
+                padding: 0.2rem 0.6rem;
             }
         }
     </style>
@@ -675,22 +714,28 @@
     <div class="backdrop"></div>
     
     <header class="header">
-        <a href="index.html" class="logo">Vampire Mystery Shop</a>
-        <nav>
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="products.html" class="nav-link">Products</a>
-            <a href="about.html" class="nav-link">About</a>
-            <a href="contact.html" class="nav-link">Contact</a>
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="/" class="logo">Vampire Shop</a>
+        <nav class="nav-links" id="navLinks">
+            <a href="/" class="nav-link">首页</a>
+            <a href="/products.html" class="nav-link">商品</a>
+            <a href="/information.html" class="nav-link">关于</a>
+            <a href="/account.html" class="nav-link">账户</a>
+            <a href="/orders.html" class="nav-link">订单</a>
         </nav>
     </header>
 
-    <div class="category-nav">
-        <a href="#necklaces">Necklaces</a>
-        <a href="#rings">Rings</a>
-        <a href="#earrings">Earrings</a>
-        <a href="#bracelets">Bracelets</a>
-        <a href="#accessories">Accessories</a>
-    </div>
+    <nav class="category-nav">
+        <a href="#" data-category="all">全部商品</a>
+        <a href="#" data-category="potions">魔法药水</a>
+        <a href="#" data-category="artifacts">神秘物品</a>
+        <a href="#" data-category="books">古籍典藏</a>
+        <a href="#" data-category="accessories">神秘饰品</a>
+    </nav>
 
     <div class="cart-icon">
         🛒
@@ -1301,6 +1346,45 @@
                 } else {
                     console.error('未找到商品卡片:', productId);
                 }
+            }
+        });
+
+        // 移动端菜单切换
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            document.getElementById('navLinks').classList.toggle('active');
+            const spans = this.getElementsByTagName('span');
+            
+            // 添加汉堡菜单动画
+            if (document.getElementById('navLinks').classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // 点击导航链接时关闭菜单
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+                const spans = document.getElementById('menuToggle').getElementsByTagName('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // 监听窗口大小变化，在大屏幕时重置菜单状态
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.getElementById('navLinks').classList.remove('active');
+                const spans = document.getElementById('menuToggle').getElementsByTagName('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             }
         });
     </script>

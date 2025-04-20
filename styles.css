@@ -64,4 +64,53 @@
 
 .add-to-cart:hover {
     background: #ff5252;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 1024px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .product-image {
+        height: 250px;
+    }
+
+    .product-info h3 {
+        font-size: 1.2rem;
+    }
+
+    .product-info p {
+        font-size: 0.9rem;
+    }
+
+    .price {
+        font-size: 1.1rem;
+    }
+
+    .add-to-cart {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* 添加触摸设备优化 */
+@media (hover: none) {
+    .product-card:hover {
+        transform: none;
+    }
+    
+    .add-to-cart:active {
+        background: #ff5252;
+    }
 } 
